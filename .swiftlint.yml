@@ -1,0 +1,142 @@
+# SwiftLint 配置文件
+# Typelock 项目代码规范配置
+
+# 禁用的规则
+disabled_rules:
+  - trailing_whitespace      # 允许行尾空白（有时在注释中有用）
+  - line_length             # 使用自定义行长度限制
+  - file_length             # 使用自定义文件长度限制
+  - type_name               # 使用自定义类型命名规则
+  - identifier_name         # 使用自定义标识符命名规则
+  - inclusive_language
+
+# 启用的可选规则
+opt_in_rules:
+  - empty_count             # 使用 isEmpty 而不是 count == 0
+  - force_unwrapping        # 避免强制解包
+  - implicitly_unwrapped_optional  # 避免隐式解包可选值
+  - private_outlet          # IBOutlet 应该是私有的
+  - redundant_nil_coalescing # 避免冗余的 nil 合并
+  - switch_case_alignment   # switch case 对齐
+  - trailing_closure        # 使用尾随闭包语法
+  - unneeded_parentheses_in_closure_argument  # 移除闭包参数中不必要的括号
+  - vertical_whitespace_closing_braces  # 闭合大括号前的垂直空白
+
+# 包含的路径
+included:
+  - src
+
+# 排除的路径
+excluded:
+  - Carthage
+  - Pods
+  - .build
+  - DerivedData
+  - .swiftpm
+  - Tests/LinuxMain.swift
+
+# 自定义规则配置
+
+# 函数体长度
+function_body_length:
+  warning: 60
+  error: 100
+
+# 类型体长度
+type_body_length:
+  warning: 300
+  error: 600
+
+# 圈复杂度
+cyclomatic_complexity:
+  warning: 10
+  error: 60
+
+# 嵌套类型级别
+nesting:
+  type_level:
+    warning: 2
+    error: 3
+
+# 函数参数数量
+function_parameter_count:
+  warning: 6
+  error: 8
+
+# 大文件规则
+large_tuple:
+  warning: 3
+  error: 4
+
+# 强制类型转换
+force_cast:
+  severity: error
+
+# 强制 try
+force_try:
+  severity: error
+
+# 重复导入
+duplicate_imports:
+  severity: error
+
+# 垂直空白行
+vertical_whitespace:
+  max_empty_lines: 2
+
+# 尾随逗号
+trailing_comma:
+  mandatory_comma: true
+
+# 返回箭头空白
+return_arrow_whitespace:
+  severity: warning
+
+# 冒号空白
+colon:
+  flexible_right_spacing: false
+  apply_to_dictionaries: true
+
+# 逗号空白
+comma:
+  severity: warning
+
+# 控制语句
+control_statement:
+  severity: warning
+
+# 自定义规则
+custom_rules:
+  # 禁止使用 print 语句（应该使用日志系统）
+  no_print:
+    name: "避免使用 print"
+    regex: '\bprint\('
+    message: "请使用日志系统而不是 print 语句"
+    severity: warning
+    excluded: ".*/Utils/Logger\\.swift"
+
+  # 强制使用 self 访问属性（在某些情况下）
+  explicit_self:
+    name: "明确使用 self"
+    regex: '(?<!\bself\.)\b(onInputSourceChanged|onLockStateChanged)\s*='
+    message: "在设置闭包属性时请明确使用 self"
+    severity: warning
+    excluded: ".*/(Core|UI|App)/.*"
+
+  # 避免使用魔法数字
+  no_magic_numbers:
+    name: "避免魔法数字"
+    regex: '(?<![a-zA-Z_])[0-9]{3,}(?![a-zA-Z_])'
+    message: "请将数字定义为常量"
+    severity: warning
+    excluded: "(.*Test.*|.*/Utils/Constants\\.swift|.*/Utils/HotKeyManager\\.swift|.*/Utils/ThemeManager\\.swift|.*/Utils/Extensions\\.swift|.*/UI/.*|.*/App/.*AppDelegate\\.swift)"
+
+  # TODO 和 FIXME 注释
+  todo_fixme:
+    name: "TODO 和 FIXME"
+    regex: '(TODO|FIXME):'
+    message: "请及时处理 TODO 和 FIXME 注释"
+    severity: warning
+
+# 报告器配置
+reporter: "xcode"  # 可选: "xcode", "json", "csv", "checkstyle", "junit", "html", "emoji"

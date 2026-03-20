@@ -1,0 +1,99 @@
+# SwiftFormat 配置文件
+# Typelock 项目代码格式化配置
+
+# Swift 版本
+--swiftversion 5.7
+
+# 缩进设置
+--indent 4                    # 使用 4 个空格缩进
+--indentcase false           # case 语句不额外缩进
+--indentstrings false        # 多行字符串不缩进
+
+# 空白处理
+--trimwhitespace always      # 总是移除尾随空白
+--commas always             # 总是在逗号后添加空格
+--semicolons never          # 从不使用分号（除非必要）
+
+# 换行和括号
+--wraparguments preserve     # 保持参数换行格式
+--wrapparameters preserve    # 保持参数换行格式
+--wrapcollections preserve   # 保持集合换行格式
+--closingparen balanced     # 平衡的闭合括号位置
+--wrapreturntype preserve   # 保持返回类型换行格式
+--wrapconditions preserve   # 保持条件换行格式
+
+# 数字格式
+--hexliteralcase uppercase   # 十六进制字面量使用大写
+--exponentcase lowercase     # 指数使用小写
+--decimalgrouping 3,4       # 十进制数字分组
+--binarygrouping 4,8        # 二进制数字分组
+--octalgrouping 4,8         # 八进制数字分组
+--hexgrouping 4,8           # 十六进制数字分组
+
+# 条件编译
+--ifdef no-indent           # 条件编译指令不缩进
+
+# 类型推断
+--redundanttype inferred    # 移除冗余的类型注解
+
+# 空值处理
+--empty void               # 使用 Void 而不是 ()
+
+# 参数处理
+--stripunusedargs closure-only  # 只在闭包中移除未使用的参数
+
+# 访问控制
+--self remove              # 移除不必要的 self
+--selfrequired @IBAction,@IBOutlet,@objc  # 在这些情况下保留 self
+
+# 导入排序
+--importgrouping testable-bottom  # 将 @testable import 放在底部
+
+# 标记处理
+--marktypes always         # 总是为类型添加 MARK
+--markextensions always    # 总是为扩展添加 MARK
+--extensionacl on-extension  # 在扩展上应用访问控制
+
+# 操作符空格
+--operatorfunc spaced      # 操作符函数使用空格
+--nospaceoperators ...,..<  # 这些操作符不使用空格
+--ranges spaced            # 范围操作符使用空格
+
+# 闭包处理
+--shortoptionals always    # 使用简短的可选语法 T? 而不是 Optional<T>
+
+# 头部注释
+--header strip             # 移除文件头部注释（我们使用自定义格式）
+
+# 换行符
+--linebreaks lf            # 使用 LF 换行符
+
+# 最大空行数
+--maxwidth 120             # 最大行宽度
+
+# 特殊规则
+--enable isEmpty           # 启用 isEmpty 规则
+--enable sortedImports     # 启用导入排序
+--enable duplicateImports  # 移除重复导入
+--enable unusedArguments   # 移除未使用的参数
+--enable redundantSelf     # 移除冗余的 self
+--enable redundantReturn   # 移除冗余的 return
+--enable redundantParens   # 移除冗余的括号
+--enable redundantVoidReturnType  # 移除冗余的 Void 返回类型
+--enable redundantNilInit  # 移除冗余的 nil 初始化
+--enable redundantLet      # 移除冗余的 let
+--enable redundantPattern  # 移除冗余的模式
+--enable redundantRawValues  # 移除冗余的原始值
+--enable redundantObjc     # 移除冗余的 @objc
+--enable redundantFileprivate  # 移除冗余的 fileprivate
+--enable redundantGet      # 移除冗余的 get
+--enable redundantInit     # 移除冗余的 init
+--enable redundantBreak    # 移除冗余的 break
+--enable redundantExtensionACL  # 移除冗余的扩展访问控制
+--enable redundantType     # 移除冗余的类型注解
+
+# 禁用的规则
+--disable trailingCommas   # 不强制尾随逗号
+--disable wrapMultilineStatementBraces  # 不强制多行语句大括号换行
+--disable blankLinesAtStartOfScope  # 不强制作用域开始处的空行
+--disable blankLinesAtEndOfScope    # 不强制作用域结束处的空行

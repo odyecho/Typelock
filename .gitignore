@@ -1,0 +1,66 @@
+# Claude Code
+.claude/
+
+# macOS
+.DS_Store
+Thumbs.db
+
+# Xcode
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+
+# AI Tools
+.serena/
+.cache/
+
+# Swift Package Manager (auto-generated)
+.swiftpm/
+
+# Personal / Internal
+notes/
+docs/
+CLAUDE.md
+.claudeignore
+create-xcode-project.sh
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+Config.plist
+
+# Temporary
+tmp/
+*.tmp
+*.bak
+*.swp
+*~
+
+# Node.js (如果需要构建工具)
+node_modules/
+bun.lockb
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python (如果需要脚本工具)
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Build outputs
+build/
+out/
+dist/

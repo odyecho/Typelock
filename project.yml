@@ -1,0 +1,75 @@
+name: Typelock
+options:
+  deploymentTarget:
+    macOS: "12.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    PRODUCT_NAME: Typelock
+    PRODUCT_BUNDLE_IDENTIFIER: com.typelock.macos
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "12.0"
+targets:
+  Typelock:
+    type: application
+    platform: macOS
+    deploymentTarget: "12.0"
+    sources:
+      - path: src/App/EnhancedTypelockApp.swift
+      - path: src/App/EnhancedAppDelegate.swift
+      - path: src/Core/AppStateManager.swift
+      - path: src/Core/EnhancedInputSourceManager.swift
+      - path: src/Core/EnhancedLockEngine.swift
+      - path: src/Core/PermissionManager.swift
+      - path: src/Models/InputSourceModel.swift
+      - path: src/Models/SettingsModel.swift
+      - path: src/UI/Components/EnhancedQuickActionView.swift
+      - path: src/UI/Components/UltimateQuickActionView.swift
+      - path: src/UI/Settings/UltimateGeneralSettingsView.swift
+      - path: src/UI/Settings/UltimateHotKeySettingsView.swift
+      - path: src/UI/Settings/UltimateSettingsView.swift
+      - path: src/UI/StatusBar/EnhancedStatusBarController.swift
+      - path: src/UI/StatusBar/UltimateStatusBarController.swift
+      - path: src/Utils/AnimationManager.swift
+      - path: src/Utils/Constants.swift
+      - path: src/Utils/Extensions.swift
+      - path: src/Utils/HotKeyManager.swift
+      - path: src/Utils/Logger.swift
+      - path: src/Utils/NotificationManager.swift
+      - path: src/Utils/PerformanceMonitor.swift
+      - path: src/Utils/ThemeManager.swift
+      - path: src/Resources/Assets.xcassets
+    settings:
+      base:
+        INFOPLIST_FILE: src/Resources/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.typelock.macos
+        PRODUCT_NAME: Typelock
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        CURRENT_PROJECT_VERSION: "1"
+        MARKETING_VERSION: "1.0.0"
+        ENABLE_HARDENED_RUNTIME: YES
+        GENERATE_INFOPLIST_FILE: NO
+    dependencies:
+      - sdk: Carbon.framework
+      - sdk: Cocoa.framework
+  TypelockTests:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: "12.0"
+    sources:
+      - path: tests/UnitTests
+    dependencies:
+      - target: Typelock
+    settings:
+      base:
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/Typelock.app/Contents/MacOS/Typelock
+        BUNDLE_LOADER: $(TEST_HOST)
+schemes:
+  Typelock:
+    build:
+      targets:
+        Typelock: all
+    test:
+      targets:
+        - TypelockTests

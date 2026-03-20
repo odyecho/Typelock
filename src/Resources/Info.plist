@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- 基本应用信息 -->
+    <key>CFBundleName</key>
+    <string>Typelock</string>
+    <key>CFBundleDisplayName</key>
+    <string>Typelock</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.typelock.macos</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+
+    <!-- 状态栏专用应用配置 -->
+    <key>LSUIElement</key>
+    <true/>
+
+    <!-- 系统版本要求 -->
+    <key>LSMinimumSystemVersion</key>
+    <string>12.0</string>
+
+    <!-- 支持的架构 -->
+    <key>LSArchitecturePriority</key>
+    <array>
+        <string>arm64</string>
+        <string>x86_64</string>
+    </array>
+
+    <!-- 权限说明 -->
+    <key>NSAccessibilityUsageDescription</key>
+    <string>Typelock 需要辅助功能权限来监控和管理输入法状态，确保输入法锁定功能正常工作。这个权限用于：
+1. 检测输入法状态变化
+2. 区分用户主动切换和系统自动切换
+3. 实现输入法锁定功能</string>
+
+    <!-- 应用类别 -->
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.utilities</string>
+
+    <!-- 版权信息 -->
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright © 2026 Typelock. All rights reserved.</string>
+
+    <!-- 主要可执行文件 -->
+    <key>CFBundleExecutable</key>
+    <string>Typelock</string>
+
+    <!-- 信息属性列表版本 -->
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+
+    <!-- 开发语言 -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>zh_CN</string>
+
+    <!-- 支持的本地化 -->
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>zh_CN</string>
+        <string>en</string>
+    </array>
+
+    <!-- 文档类型（如果需要） -->
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <!-- 暂时不支持文档类型 -->
+    </array>
+
+    <!-- URL Schemes（如果需要） -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>Typelock URL Scheme</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>typelock</string>
+            </array>
+        </dict>
+    </array>
+
+    <!-- 高分辨率支持 -->
+    <key>NSHighResolutionCapable</key>
+    <true/>
+
+    <!-- 主要 nib 文件（SwiftUI 应用不需要） -->
+    <key>NSMainNibFile</key>
+    <string></string>
+
+    <!-- 主要故事板文件（SwiftUI 应用不需要） -->
+    <key>NSMainStoryboardFile</key>
+    <string></string>
+
+    <!-- 应用传输安全设置 -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <!-- 如果需要访问特定域名，在这里添加 -->
+        </dict>
+    </dict>
+
+    <!-- 沙盒设置（如果使用 App Store 分发） -->
+    <key>com.apple.security.app-sandbox</key>
+    <false/>
+
+    <!-- 硬化运行时设置 -->
+    <key>com.apple.security.cs.allow-jit</key>
+    <false/>
+    <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+    <false/>
+    <key>com.apple.security.cs.allow-dyld-environment-variables</key>
+    <false/>
+    <key>com.apple.security.cs.disable-library-validation</key>
+    <false/>
+
+    <!-- 网络权限（如果需要） -->
+    <key>com.apple.security.network.client</key>
+    <false/>
+    <key>com.apple.security.network.server</key>
+    <false/>
+
+    <!-- 文件系统访问权限 -->
+    <key>com.apple.security.files.user-selected.read-only</key>
+    <false/>
+    <key>com.apple.security.files.user-selected.read-write</key>
+    <false/>
+
+    <!-- 相机和麦克风权限（不需要） -->
+    <key>com.apple.security.device.camera</key>
+    <false/>
+    <key>com.apple.security.device.microphone</key>
+    <false/>
+
+    <!-- 打印权限（不需要） -->
+    <key>com.apple.security.print</key>
+    <false/>
+
+    <!-- 应用组（如果需要与其他应用共享数据） -->
+    <key>com.apple.security.application-groups</key>
+    <array>
+        <!-- 暂时不需要应用组 -->
+    </array>
+
+    <!-- 后台模式（状态栏应用不需要） -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <!-- 不需要后台模式 -->
+    </array>
+
+    <!-- 支持的设备方向（macOS 不适用） -->
+    <!-- 这些键在 macOS 应用中不需要 -->
+
+    <!-- 状态栏样式（macOS 不适用） -->
+    <!-- 这些键在 macOS 应用中不需要 -->
+
+    <!-- 启动图像（macOS 应用通常不需要） -->
+    <!-- 这些键在 macOS 应用中不需要 -->
+
+    <!-- 应用图标 -->
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+
+    <!-- 构建机器标识符 -->
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>DTPlatformBuild</key>
+    <string></string>
+    <key>DTPlatformName</key>
+    <string>macosx</string>
+    <key>DTPlatformVersion</key>
+    <string></string>
+    <key>DTSDKBuild</key>
+    <string></string>
+    <key>DTSDKName</key>
+    <string>macosx</string>
+    <key>DTXcode</key>
+    <string></string>
+    <key>DTXcodeBuild</key>
+    <string></string>
+</dict>
+</plist>
