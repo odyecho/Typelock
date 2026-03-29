@@ -6,7 +6,7 @@ SCHEME="${SCHEME:-Typelock}"
 CONFIGURATION="${CONFIGURATION:-Release}"
 PRODUCT_NAME="${PRODUCT_NAME:-Typelock}"
 DIST_DIR="${DIST_DIR:-$PROJECT_ROOT/dist/release}"
-ARCHIVE_PATH="$DIST_DIR/$PRODUCT_NAME.xcarchive"
+ARCHIVE_PATH=""
 EXPORT_DIR="$DIST_DIR/export"
 APP_PATH="$EXPORT_DIR/$PRODUCT_NAME.app"
 PKG_UNSIGNED_PATH="$DIST_DIR/$PRODUCT_NAME-unsigned.pkg"
@@ -22,6 +22,15 @@ SIMULATE_INSTALL_CHECK=false
 APP_PATH_SET=false
 PKG_PATH_SET=false
 ALLOW_ASSESS_FAIL=false
+ARCHIVE_ROOT=""
+
+cleanup() {
+    if [[ -n "$ARCHIVE_ROOT" && -d "$ARCHIVE_ROOT" ]]; then
+        rm -rf "$ARCHIVE_ROOT"
+    fi
+}
+
+trap cleanup EXIT
 
 usage() {
     cat <<EOF
@@ -102,7 +111,6 @@ while [[ $# -gt 0 ]]; do
 done
 
 DIST_DIR="$(python3 -c 'import os,sys; print(os.path.abspath(sys.argv[1]))' "$DIST_DIR")"
-ARCHIVE_PATH="$DIST_DIR/$PRODUCT_NAME.xcarchive"
 EXPORT_DIR="$DIST_DIR/export"
 if [[ "$APP_PATH_SET" == false ]]; then
     APP_PATH="$EXPORT_DIR/$PRODUCT_NAME.app"
@@ -166,13 +174,16 @@ fi
 
 mkdir -p "$DIST_DIR"
 if [[ "$VALIDATE_EXISTING" == false ]]; then
-    rm -rf "$ARCHIVE_PATH" "$EXPORT_DIR" "$PKG_UNSIGNED_PATH" "$PKG_PATH" "$REPORT_PATH"
+    rm -rf "$EXPORT_DIR" "$PKG_UNSIGNED_PATH" "$PKG_PATH" "$REPORT_PATH"
     mkdir -p "$EXPORT_DIR"
+    ARCHIVE_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/${PRODUCT_NAME}-archive.XXXXXX")"
+    ARCHIVE_PATH="$ARCHIVE_ROOT/$PRODUCT_NAME.xcarchive"
 
     echo "=== T5-4 打包开始 ==="
     echo "SCHEME=$SCHEME"
     echo "PRODUCT_NAME=$PRODUCT_NAME"
     echo "DIST_DIR=$DIST_DIR"
+    echo "ARCHIVE_PATH=$ARCHIVE_PATH"
 
     xcodebuild archive \
         "${CONTAINER_ARGS[@]}" \
@@ -213,6 +224,7 @@ if [[ "$VALIDATE_EXISTING" == false ]]; then
         xcrun stapler staple "$PKG_PATH"
     fi
 else
+    ARCHIVE_PATH="未保留（仅在临时目录生成）"
     APP_PATH="$(python3 -c 'import os,sys; print(os.path.abspath(sys.argv[1]))' "$APP_PATH")"
     PKG_PATH="$(python3 -c 'import os,sys; print(os.path.abspath(sys.argv[1]))' "$PKG_PATH")"
     if [[ ! -d "$APP_PATH" ]]; then

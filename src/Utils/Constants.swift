@@ -8,9 +8,17 @@ enum Constants {
     enum App {
         static let name = "Typelock"
         static let bundleId = "com.typelock.macos"
-        static let version = "1.0.0"
-        static let build = "1"
         static let copyright = "Copyright © 2026 Typelock. All rights reserved."
+
+        /// 从应用 Bundle 读取版本号，避免与构建配置重复维护。
+        static var version: String {
+            Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        }
+
+        /// 从应用 Bundle 读取构建号，确保界面显示与安装包一致。
+        static var build: String {
+            Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+        }
     }
 
     // MARK: - User Defaults Keys
