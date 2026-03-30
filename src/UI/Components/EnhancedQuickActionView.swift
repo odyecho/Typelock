@@ -156,14 +156,23 @@ struct EnhancedQuickActionView: View {
                     }
                 }
 
-                Button(action: toggleCurrentInputSourceLock) {
-                    HStack(spacing: 6) {
-                        Image(systemName: isCurrentInputSourceLocked ? "lock.open" : "lock")
-                        Text(isCurrentInputSourceLocked ? "解锁输入法" : "锁定当前输入法")
+                HStack(spacing: 12) {
+                    Button(action: toggleCurrentInputSourceLock) {
+                        HStack(spacing: 6) {
+                            Image(systemName: isCurrentInputSourceLocked ? "lock.open" : "lock")
+                            Text(isCurrentInputSourceLocked ? "解锁输入法" : "锁定当前输入法")
+                        }
+                        .frame(maxWidth: .infinity)
                     }
-                    .frame(maxWidth: .infinity)
+                    .buttonStyle(.borderedProminent)
+
+                    Button(
+                        action: { showingInputSourceList.toggle() },
+                        label: { Image(systemName: showingInputSourceList ? "chevron.up" : "list.bullet") }
+                    )
+                    .buttonStyle(.bordered)
+                    .help(showingInputSourceList ? "隐藏输入法列表" : "显示输入法列表")
                 }
-                .buttonStyle(.borderedProminent)
             }
 
             // 锁定状态详情
@@ -212,26 +221,6 @@ struct EnhancedQuickActionView: View {
 
     private var quickActionsSection: some View {
         VStack(spacing: 8) {
-            // 主要锁定操作
-            HStack(spacing: 12) {
-                Button(action: toggleLock) {
-                    HStack {
-                        Image(systemName: inputSourceManager.isLocked ? "lock.open" : "lock.fill")
-                        Text(inputSourceManager.isLocked ? "解锁输入法" : "锁定输入法")
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-
-                Button(
-                    action: { showingInputSourceList.toggle() },
-                    label: { Image(systemName: showingInputSourceList ? "chevron.up" : "list.bullet") }
-                )
-                .buttonStyle(.bordered)
-                .help(showingInputSourceList ? "隐藏输入法列表" : "显示输入法列表")
-            }
-
             // 辅助操作
             HStack(spacing: 8) {
                 Button("刷新") {
@@ -247,14 +236,6 @@ struct EnhancedQuickActionView: View {
                 .controlSize(.small)
 
                 Spacer()
-
-                if inputSourceManager.isLocked {
-                    Button("锁定到当前") {
-                        inputSourceManager.lockToCurrent()
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
-                }
             }
         }
     }

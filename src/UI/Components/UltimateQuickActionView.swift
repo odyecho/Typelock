@@ -215,17 +215,33 @@ struct UltimateQuickActionView: View {
                     }
                 }
 
-                Button(action: toggleCurrentInputSourceLock) {
-                    HStack(spacing: 8) {
-                        Image(systemName: isCurrentInputSourceLocked ? "lock.open" : "lock")
-                            .font(.system(size: 13, weight: .semibold))
-                        Text(isCurrentInputSourceLocked ? "解锁输入法" : "锁定当前输入法")
-                            .font(.system(size: 13, weight: .medium))
+                HStack(spacing: 12) {
+                    Button(action: toggleCurrentInputSourceLock) {
+                        HStack(spacing: 8) {
+                            Image(systemName: isCurrentInputSourceLocked ? "lock.open" : "lock")
+                                .font(.system(size: 13, weight: .semibold))
+                            Text(isCurrentInputSourceLocked ? "解锁输入法" : "锁定当前输入法")
+                                .font(.system(size: 13, weight: .medium))
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
+                    .buttonStyle(.borderedProminent)
+
+                    Button(
+                        action: {
+                            withAnimation(.typelock) {
+                                showingInputSourceList.toggle()
+                            }
+                        },
+                        label: {
+                            Image(systemName: showingInputSourceList ? "chevron.up" : "list.bullet")
+                                .font(.title3)
+                        }
+                    )
+                    .buttonStyle(.bordered)
+                    .help(showingInputSourceList ? "隐藏输入法列表" : "显示输入法列表")
                 }
-                .buttonStyle(.borderedProminent)
             }
 
             // 锁定状态详情
@@ -275,32 +291,6 @@ struct UltimateQuickActionView: View {
 
     private var quickActionsSection: some View {
         VStack(spacing: 12) {
-            // 主要操作按钮
-            HStack(spacing: 12) {
-                Button(action: toggleLock) {
-                    HStack {
-                        Image(systemName: inputSourceManager.isLocked ? "lock.open" : "lock.fill")
-                            .font(.title3)
-                        Text(inputSourceManager.isLocked ? "解锁输入法" : "锁定输入法")
-                            .fontWeight(.medium)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-
-                Button(
-                    action: { showingInputSourceList.toggle() },
-                    label: {
-                        Image(systemName: showingInputSourceList ? "chevron.up" : "list.bullet")
-                            .font(.title3)
-                    }
-                )
-                .buttonStyle(.bordered)
-                .help(showingInputSourceList ? "隐藏输入法列表" : "显示输入法列表")
-            }
-
             // 辅助操作按钮
             VStack(spacing: 4) {
                 HStack(spacing: 8) {
