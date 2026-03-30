@@ -160,7 +160,9 @@ class EnhancedStatusBarController: NSObject {
         if quickActionPopover?.isShown == true {
             quickActionPopover?.performClose(nil)
         } else {
+            NSApp.activate(ignoringOtherApps: true)
             quickActionPopover?.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+            quickActionPopover?.contentViewController?.view.window?.makeKey()
             logger.debug("显示快速操作面板", category: "StatusBar")
         }
     }

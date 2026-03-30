@@ -507,7 +507,9 @@ class UltimateStatusBarController: NSObject {
     private func showQuickActionsWithAnimation() {
         guard let button = statusItem?.button, let popover = quickActionPopover else { return }
 
+        NSApp.activate(ignoringOtherApps: true)
         popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        popover.contentViewController?.view.window?.makeKey()
         animationManager.animatePopoverAppearance(popover)
 
         // 菜单栏应用不是前台 App，.transient 无法收到外部点击事件
