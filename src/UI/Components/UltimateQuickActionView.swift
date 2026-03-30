@@ -215,18 +215,17 @@ struct UltimateQuickActionView: View {
                     }
                 }
 
-                Button(action: { inputSourceManager.lockToCurrent() }) {
+                Button(action: toggleCurrentInputSourceLock) {
                     HStack(spacing: 8) {
-                        Image(systemName: isCurrentInputSourceLocked ? "lock.fill" : "lock")
+                        Image(systemName: isCurrentInputSourceLocked ? "lock.open" : "lock")
                             .font(.system(size: 13, weight: .semibold))
-                        Text(isCurrentInputSourceLocked ? "已锁定当前输入法" : "锁定当前输入法")
+                        Text(isCurrentInputSourceLocked ? "解锁输入法" : "锁定当前输入法")
                             .font(.system(size: 13, weight: .medium))
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(isCurrentInputSourceLocked)
             }
 
             // 锁定状态详情
@@ -725,6 +724,16 @@ struct UltimateQuickActionView: View {
         // 触觉反馈
         if #available(macOS 10.14, *) {
             NSHapticFeedbackManager.defaultPerformer.perform(.generic, performanceTime: .default)
+        }
+    }
+
+    private func toggleCurrentInputSourceLock() {
+        withAnimation(.typelock) {
+            if isCurrentInputSourceLocked {
+                inputSourceManager.setLocked(false)
+            } else {
+                inputSourceManager.lockToCurrent()
+            }
         }
     }
 }
