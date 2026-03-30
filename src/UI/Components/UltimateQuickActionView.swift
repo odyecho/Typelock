@@ -157,6 +157,11 @@ struct UltimateQuickActionView: View {
         }
     }
 
+    private var isCurrentInputSourceLocked: Bool {
+        guard let currentInputSource = inputSourceManager.currentInputSource else { return false }
+        return inputSourceManager.isLocked && inputSourceManager.lockedInputSource?.id == currentInputSource.id
+    }
+
     // MARK: - Status Card
 
     private var statusCard: some View {
@@ -209,6 +214,19 @@ struct UltimateQuickActionView: View {
                         }
                     }
                 }
+
+                Button(action: { inputSourceManager.lockToCurrent() }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: isCurrentInputSourceLocked ? "lock.fill" : "lock")
+                            .font(.system(size: 13, weight: .semibold))
+                        Text(isCurrentInputSourceLocked ? "已锁定当前输入法" : "锁定当前输入法")
+                            .font(.system(size: 13, weight: .medium))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(isCurrentInputSourceLocked)
             }
 
             // 锁定状态详情
