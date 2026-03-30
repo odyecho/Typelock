@@ -215,18 +215,19 @@ struct UltimateQuickActionView: View {
                     }
                 }
 
-                HStack(spacing: 12) {
+                HStack(spacing: 10) {
+                    Spacer()
+
                     Button(action: toggleCurrentInputSourceLock) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: 6) {
                             Image(systemName: isCurrentInputSourceLocked ? "lock.open" : "lock")
-                                .font(.system(size: 13, weight: .semibold))
-                            Text(isCurrentInputSourceLocked ? "解锁输入法" : "锁定当前输入法")
-                                .font(.system(size: 13, weight: .medium))
+                                .font(.system(size: 12, weight: .semibold))
+                            Text(isCurrentInputSourceLocked ? "解锁输入法" : "锁定输入法")
+                                .font(.system(size: 12, weight: .medium))
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
                     }
                     .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
 
                     Button(
                         action: {
@@ -236,10 +237,11 @@ struct UltimateQuickActionView: View {
                         },
                         label: {
                             Image(systemName: showingInputSourceList ? "chevron.up" : "list.bullet")
-                                .font(.title3)
+                                .font(.system(size: 14, weight: .medium))
                         }
                     )
                     .buttonStyle(.bordered)
+                    .controlSize(.small)
                     .help(showingInputSourceList ? "隐藏输入法列表" : "显示输入法列表")
                 }
             }

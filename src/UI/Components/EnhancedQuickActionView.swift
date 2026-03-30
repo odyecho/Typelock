@@ -156,21 +156,24 @@ struct EnhancedQuickActionView: View {
                     }
                 }
 
-                HStack(spacing: 12) {
+                HStack(spacing: 10) {
+                    Spacer()
+
                     Button(action: toggleCurrentInputSourceLock) {
                         HStack(spacing: 6) {
                             Image(systemName: isCurrentInputSourceLocked ? "lock.open" : "lock")
-                            Text(isCurrentInputSourceLocked ? "解锁输入法" : "锁定当前输入法")
+                            Text(isCurrentInputSourceLocked ? "解锁输入法" : "锁定输入法")
                         }
-                        .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
 
                     Button(
                         action: { showingInputSourceList.toggle() },
                         label: { Image(systemName: showingInputSourceList ? "chevron.up" : "list.bullet") }
                     )
                     .buttonStyle(.bordered)
+                    .controlSize(.small)
                     .help(showingInputSourceList ? "隐藏输入法列表" : "显示输入法列表")
                 }
             }
