@@ -108,6 +108,26 @@ xcodegen generate
 open Typelock.xcodeproj
 ```
 
+### 本地直接使用最新版 Debug 版
+
+如果你只是想在本机直接跑最新版，不想手动找 Xcode 的运行入口，可以在项目根目录执行：
+
+```bash
+chmod +x scripts/dev/run-debug-local.sh
+./scripts/dev/run-debug-local.sh
+```
+
+脚本会自动完成两件事：
+
+- 编译 `Typelock` 的 `Debug` 版本
+- 自动打开刚编译出的最新版应用
+
+如果你只想编译，不想立即打开：
+
+```bash
+./scripts/dev/run-debug-local.sh --no-open
+```
+
 > **注意**: 当前版本尚未通过 Apple 公证，首次运行需在「系统设置 → 隐私与安全性」中手动允许。
 
 ## 使用指南
