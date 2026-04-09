@@ -130,6 +130,29 @@ chmod +x scripts/dev/run-debug-local.sh
 
 > **注意**: 当前版本尚未通过 Apple 公证，首次运行需在「系统设置 → 隐私与安全性」中手动允许。
 
+### 更新“应用程序”中的最新版
+
+如果你的目标不是临时运行，而是把**当前源码的最新版本**真正覆盖安装到「应用程序」目录，请使用：
+
+```bash
+chmod +x scripts/dev/install-latest-to-applications.sh
+./scripts/dev/install-latest-to-applications.sh
+```
+
+如果安装后希望自动启动：
+
+```bash
+./scripts/dev/install-latest-to-applications.sh --open
+```
+
+这个脚本会：
+
+- 基于当前源码重新编译，而不是直接使用 `dist/` 下可能过期的安装包
+- 在安装前显示“当前已安装版本”和“本次将安装版本”
+- 覆盖安装到 `/Applications/Typelock.app`
+
+因此，当你说“更新最新版本到应用程序”时，优先使用这个脚本最稳妥。
+
 ## 使用指南
 
 ### 基本操作
